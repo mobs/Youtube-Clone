@@ -1,10 +1,15 @@
 import React from "react";
 
-import { Gird, Paper, Typography } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 
-const VideoItem = () => {
+const VideoItem = ({ video, onVideoSelect }) => {
     return (
-        <h1> Video Item </h1>
+        <Grid item xs={12}>
+            <Paper style={{display: 'flex', alignItems: 'center'}} onClick={() => onVideoSelect(video)}>
+                <img style={{marginRight: '20px' }} alt="thumbnail" src={video.snippet.thumbnails.medium.url} />
+                <Typography variant="subtitle1"><b>{video.snippet.title}</b></Typography>
+            </Paper>
+        </Grid>
     )
 }
 

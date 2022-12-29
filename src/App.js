@@ -16,8 +16,16 @@ import { SearchBar, VideoDetail, VideoList } from './components';
 class App extends React.Component {
   
   state = {
-    video: [],
+    videos: [],
     selectedVideo: null
+  }
+
+  componentDidMount() {
+    this.handleSubmit('virat kohli 100');
+  }
+
+  onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video })
   }
 
   handleSubmit = async (searchText) => {
@@ -35,12 +43,12 @@ class App extends React.Component {
   } 
 
   render () {
-    const { selectedVideo } = this.state;
+    const { selectedVideo, videos } = this.state;
 
     return (
-      <Grid justify='center' container spacing ={16}>
+      <Grid justify='center' container spacing ={10}>
         <Grid item xs={12}>
-          <Grid container spacing={16}>
+          <Grid container spacing={10}>
             <Grid item xs={12}>
               {/* SEARCH BAR */}
               <SearchBar onFormSubmit={this.handleSubmit} />
@@ -51,13 +59,13 @@ class App extends React.Component {
             </Grid>
             <Grid item xs={4}>
               {/* VIDEO LIST */}
+              <VideoList videos={videos} onVideoSelect={this.onVideoSelect}/>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
     )
   }
-  
 }
 
 export default App;
